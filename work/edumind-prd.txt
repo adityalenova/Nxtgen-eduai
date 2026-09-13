@@ -1,0 +1,1222 @@
+
+===== PAGE 1 =====
+EduMind AI
+ Complete Product Build Document
+ Version 1.0 + Version 2.0
+ v1.0 — Full-Featured PRD
+ Tutoring · Planner · Assessment · Teacher Co-Pilot · School Comms · Skill Navigator
+ v2.0 — 100% Free Stack Edition
+ Google Auth · Gemini Flash · Groq · Streaks · Badges · Voice Notes · Timer · Timetable · Leaderboard
+ Prepared by Aditya | Stack: React + Supabase + Vercel | Total Cost v2: ■0/month
+
+===== PAGE 2 =====
+Page 1
+EduMind AI — PRD v1.0
+ EduMind AI
+ Product Requirements Document — v1.0
+ Full-Featured Edition with Paid & Free API Options
+ Covers: AI Tutoring · Study Planner · Assessment Engine · Teacher Co-Pilot · School Comms · Skill
+ Navigator
+ Stack: React + Supabase + Vercel + Claude API / Gemini / Groq
+ Prepared by Aditya
+
+===== PAGE 3 =====
+Page 2
+EduMind AI — PRD v1.0
+SECTION 1 — PROBLEM STATEMENT
+EduMind AI is built to solve deeply interconnected pain points facing students, parents, and teachers in India —
+especially in Tier 2/3 cities and engineering colleges.
+1.1 Student Pain Points
+What Students Are Struggling With
+■ Rote Learning Trap: 76.6% of Class 3 students cannot read grade-level text (ASER 2024).
+■ Exam Pressure: No personalised support; one-size-fits-all teaching creates anxiety.
+■ No On-Demand Help: Teachers unavailable after school hours; doubt resolution delayed by days.
+■■ No Study Roadmap: Students don't know what to study, in what order, or how much time to spend.
+■ Information Overload: YouTube, PDFs, notes — but no coherent system to tie them together.
+■ Skill-to-Job Gap: Curriculum disconnected from actual internship and job requirements.
+■ Language Barrier: Core concepts taught in English; many students think in Telugu/Hindi.
+■ No Feedback Loop: Assignments returned with just a score — no explanation of mistakes.
+1.2 Teacher Pain Points
+What Teachers Are Struggling With
+■ Admin Overload: Teachers spend 30-40% of time on paperwork, attendance, and non-teaching tasks.
+■ Lesson Planning from Scratch: Each chapter requires hours of planning with no AI assistance.
+■ No Differentiated Teaching: One lesson plan must serve 40+ students at different levels.
+■ No Class Performance Analytics: Teachers can't identify struggling students without manual checking.
+■ Communication Chaos: 3-4 WhatsApp groups per class; buried messages; no read receipts.
+■ Assessment Generation: Manually creating quiz variants to prevent copying is time-consuming.
+1.3 Parent Pain Points
+What Parents Are Struggling With
+■ Zero Visibility: Parents don't know daily attendance, homework, or exam schedules in real-time.
+■ WhatsApp Chaos: Fee reminders, event notices, and memes all in the same group.
+■ No Academic Progress Tracking: Report cards once/twice a year; no ongoing mastery visibility.
+■ Language Barrier: School circulars in English; many parents more comfortable in regional languages.
+■ Event Miss: Annual days, PTMs, fee deadlines — missed due to poor communication.
+■ Fee Transparency: No easy way to check what's paid, pending, or due — leads to disputes.
+
+===== PAGE 4 =====
+Page 3
+EduMind AI — PRD v1.0
+SECTION 2 — PRODUCT VISION & SIX CORE MODULES
+EduMind AI is a unified, AI-first learning and school management platform. Think of it as NotebookLM + Khan
+Academy + ClassDojo + a school ERP — rebuilt for the Indian K-12 and engineering college context.
+Module
+Description
+Module 1 — AI Study
+Companion
+Source-grounded Q&A;, mind maps, audio overviews, flashcards, quizzes.
+NotebookLM-style.
+Module 2 — Study Planner
+Syllabus-to-plan, spaced repetition, mastery heatmap, daily focus sessions.
+Module 3 — Assessment Engine
+Quiz generator, auto-grader, rubric feedback, skill reports, viva simulator.
+Module 4 — Teacher Co-Pilot
+Lesson planner, worksheet generator, class analytics, at-risk flags.
+Module 5 — School Comms &
+Events
+Announcements with read-confirmation, event calendar, RSVP, fee alerts,
+PTM scheduler.
+Module 6 — Skill Navigator
+Role-gap analysis, adaptive learning paths, portfolio builder, digital badges.
+
+===== PAGE 5 =====
+Page 4
+EduMind AI — PRD v1.0
+SECTION 3 — MODULE 1 — AI STUDY COMPANION
+(NotebookLM-Inspired)
+Feature 1: Source-Grounded Q&A; (RAG Chat)
+Student uploads course PDFs, lecture notes, YouTube links, and images.
+AI answers ONLY from those uploaded sources — no hallucination.
+Every answer shows citation: "Source: Chapter 3, Page 47, Thermodynamics.pdf"
+Multimodal: supports text, images of diagrams, and scanned handwritten notes (via OCR).
+Multi-source synthesis: "Compare what Chapter 2 and Chapter 5 say about this concept."
+Feature 2: Interactive Mind Maps
+Auto-generate visual mind maps from any uploaded document or topic.
+Hierarchical branching: Topic → Subtopics → Key Facts → Related Concepts.
+Click any node to expand details or open a focused Q&A; chat on that concept.
+Export as PNG/PDF. Student can manually add nodes and connections.
+Mind map updates as new sources are added to the notebook.
+Feature 3: Audio Overviews (Podcast Mode)
+Convert any document into a 5-15 minute conversational audio summary.
+Three formats: Brief (single host), Debate (two AI hosts), Deep Dive (technical walkthrough).
+Audio playback speed control: 0.75x to 2x. Auto-transcript with timestamps.
+Feature 4: Auto-Generated Study Aids
+Flashcards: Term-Definition cards with spaced repetition scheduling.
+Quizzes: MCQ, fill-in-the-blank, short answer — tagged by topic and difficulty.
+Summary Notes: Chapter-wise summaries in bullet or paragraph form.
+Key Formulas Sheet: Extracts all equations from science/math notes.
+Comparison Tables: "Compare X vs Y" → structured table output.
+Feature 5: Multilingual Socratic Tutor
+AI asks guiding questions instead of giving direct answers — builds reasoning.
+Adjusts depth: "Explain like I'm 12" to "Explain at JEE Advanced level".
+Explains in Telugu, Hindi, or Hinglish with English technical terms.
+Session memory: remembers what was covered in previous sessions within a notebook.
+
+===== PAGE 6 =====
+Page 5
+EduMind AI — PRD v1.0
+India-First Additions (Beyond Standard NotebookLM)
+■ Photo-to-Notes: Snap blackboard/textbook page → AI converts to searchable notes.
+■ Offline Mode: Core flashcard review and audio playback works without internet (PWA).
+■ Board-Specific: CBSE, ICSE, Telangana, AP Board curriculum tagging.
+■ JEE/NEET/EAMCET Mode: Specialised practice banks for competitive exams.
+■ Study Groups: Shared notebooks where 2-5 students collaborate and annotate.
+
+===== PAGE 7 =====
+Page 6
+EduMind AI — PRD v1.0
+SECTION 4 — MODULE 2 — SMART STUDY PLANNER
+Study Planner Features
+■ Syllabus-to-Plan: Upload syllabus PDF → AI maps all topics and builds week-by-week plan.
+■ Exam Countdown: Input exam dates; system back-calculates revision schedule with buffer days.
+■ Spaced Repetition Engine: Topics revisited at 1 → 3 → 7 → 21 day intervals.
+■ Mastery Heatmap: Per-topic colour grid (red=weak, green=mastered) updated by quiz performance.
+■ Micro-Session Alerts: "You have 20 mins before class — here's a 5-question revision on Chapter 4."
+■ Progress Tracker: Tracks actual vs planned study time; adjusts plan if student falls behind.
+Workflow Step
+Action
+1 — Onboard
+Student inputs subjects, exam dates, daily hours, current level per topic.
+2 — Plan Generation
+AI creates personalised 4-16 week schedule broken into daily sessions.
+3 — Study Session
+Student reads notes, then takes 5-question quiz at end of session.
+4 — Performance Feed
+Quiz results update mastery heatmap; plan adjusts automatically.
+5 — Weak Topic Flags
+AI flags 3 weakest topics; schedules extra revision sessions.
+6 — Pre-Exam Sprint
+Last 2 weeks: AI generates targeted 30-question mocks per subject.
+
+===== PAGE 8 =====
+Page 7
+EduMind AI — PRD v1.0
+SECTION 5 — MODULE 3 — AI ASSESSMENT ENGINE
+Assessment Features
+■ Auto-Quiz Generator: Upload notes → system generates 20-50 questions (MCQ, short, long).
+■■ Skill Tagging: Every question tagged by topic, difficulty, and learning outcome.
+■ Variant Generation: Creates 3-5 randomised paper variants to prevent copying.
+■ Auto-Grader: MCQs graded instantly; short answers graded by AI with rubric breakdown.
+■ Essay/Code Feedback: Rubric-based feedback on structure, logic, clarity, and correctness.
+■ Skill Reports: Per-student and per-class reports showing mastery by topic and skill.
+■ Plagiarism Checker: Detects copied text and AI-generated content in submissions.
+■■ Oral Viva Simulator: AI generates viva questions; student practices; AI gives feedback.
+
+===== PAGE 9 =====
+Page 8
+EduMind AI — PRD v1.0
+SECTION 6 — MODULE 4 — TEACHER CO-PILOT
+Lesson Planning Capabilities
+■ Syllabus-to-Lesson: Upload syllabus → AI generates complete lesson sequence for semester.
+■■ Lesson Plan Generator: Objectives, activities, timing, discussion questions, assessment per chapter.
+■ Worksheet Generator: Practice sheets with answer key; 3 difficulty levels.
+■ Lab Instructions: Step-by-step lab procedure documents for science subjects.
+■ Resource Curator: Suggests relevant YouTube videos and simulations per topic.
+■■ Class Calendar: Semester-wide calendar showing topics, assessments, and events.
+Post-Class Analytics
+■ Quiz Performance Summary: Class-level and student-level results after every quiz.
+■ Follow-Up Suggestions: "25% of class missed Q7 on Newton's 3rd Law — here's a re-teach activity."
+■ At-Risk Dashboard: Declining attendance or quiz scores flagged in red.
+■ Comment Assistant: AI drafts progress report comments; teacher reviews and edits.
+
+===== PAGE 10 =====
+Page 9
+EduMind AI — PRD v1.0
+SECTION 7 — MODULE 5 — SCHOOL COMMUNICATIONS & EVENTS
+Why Replace WhatsApp?
+■ No read receipts: "I never got the fee reminder" — school has no proof.
+■ Message burial: Fee deadline buried under 40 birthday wishes.
+■ Wrong group sends: Exam schedule sent to teachers instead of parents.
+■ No role separation: Parents, teachers, and admin in the same group.
+■ Solution: EduMind Comms — a structured, role-separated communication layer.
+Communication & Event Features
+■ Announcements: Admin broadcasts to All Parents / Class 9A / Teachers — with read confirmation.
+■ Multi-channel: Critical messages via in-app push + optional WhatsApp/SMS fallback.
+■ Event Calendar: School events, holidays, exam timetables — with RSVP option for parents.
+■ PTM Scheduler: Parents book Parent-Teacher Meeting slots online; automated reminders.
+■ Fee Alerts: Fee due reminders with deadline, amount, and payment link.
+■ Multilingual Circulars: Admin types in English → AI translates to Telugu/Hindi automatically.
+■ Circular Archive: All past circulars searchable and downloadable.
+■ Achievement Posts: Student toppers and competition winners — celebratory parent-visible posts.
+
+===== PAGE 11 =====
+Page 10
+EduMind AI — PRD v1.0
+SECTION 8 — SYSTEM ARCHITECTURE
+Layer 1 — Data (Supabase)
+Document Store: Supabase Storage — uploaded PDFs, slides, images (per user, per notebook).
+Vector Store: pgvector (Supabase PostgreSQL) — embeddings for RAG retrieval.
+Auth: Supabase Auth — role-based (Student/Teacher/Parent/Admin); SSO for schools.
+Realtime: Supabase Realtime — parent attendance alerts, live quiz scores.
+Row-Level Security: Each user sees only their school's data.
+Layer 2 — AI (Flexible — Paid or Free)
+Primary LLM: Claude claude-sonnet-4-6 (Anthropic) OR Gemini 2.5 Flash (free) OR Groq Llama 3 (free).
+RAG Pipeline: LangChain — chunk → embed → retrieve → generate with citations.
+Embedding Model: Gemini text-embedding-004 (free) or OpenAI text-embedding-3-small.
+Mind Map Generator: LLM outputs JSON tree → D3.js/React Flow renders interactive map.
+Audio Overview: ElevenLabs TTS (paid) OR Web Speech API (free).
+Vision/OCR: Gemini Vision — processes blackboard photos, textbook scans, diagrams.
+Translation: Gemini Flash handles multilingual natively — no separate API needed.
+Layer 3 — Application (Vercel)
+Frontend: React (Vite) + Tailwind CSS + shadcn/ui — mobile-first PWA.
+Backend: Supabase Edge Functions (Deno) for AI orchestration.
+Deployment: Vercel (frontend) — auto-deploy from GitHub.
+Push Notifications: OneSignal (free) for parent alerts and study reminders.
+Payments: Razorpay (optional) for school fee collection.
+Step
+RAG Pipeline Action
+1 — Upload
+Student uploads PDF → Supabase Storage → file URL saved to sources table.
+2 — Extract
+Edge Function: pdf-parse for text; Gemini Vision for images.
+3 — Chunk
+Split into 512-token overlapping chunks with LangChain TextSplitter.
+4 — Embed
+Each chunk → embedding API → vector stored in pgvector.
+5 — Query
+Student question → embed → top-5 similar chunks retrieved via cosine similarity.
+6 —
+Generate
+Chunks + question → LLM → answer with page citations.
+7 — Display
+Answer in chat with source citation links.
+
+===== PAGE 12 =====
+Page 11
+EduMind AI — PRD v1.0
+
+===== PAGE 13 =====
+Page 12
+EduMind AI — PRD v1.0
+SECTION 9 — API KEYS & INTEGRATIONS (v1 — Full Option)
+Service
+Details & Cost
+Anthropic Claude API
+claude-sonnet-4-6 model. console.anthropic.com. ~$3/M input, $15/M output
+tokens.
+Gemini Flash (Free Alt)
+aistudio.google.com — free 1,500 req/day. No credit card.
+Groq / Llama 3 (Free Alt)
+console.groq.com — free 14,400 req/day. Fastest inference.
+OpenAI Embeddings
+text-embedding-3-small. platform.openai.com. $0.02/M tokens.
+Voyage AI Embeddings (Alt)
+voyage-2 model. voyageai.com. $0.10/M tokens.
+ElevenLabs TTS
+Audio Overviews. elevenlabs.io. $5/mo starter plan.
+Google Translate API
+Regional language circulars. console.cloud.google.com. $20/1M chars.
+Supabase
+Database + Auth + Storage + pgvector. Free plan for MVP. Pro: $25/mo.
+Vercel
+Frontend hosting. Free hobby plan for MVP.
+OneSignal
+Push notifications. onesignal.com. Free forever.
+Razorpay
+Fee collection. razorpay.com. Free signup, 2% per transaction.
+MSG91 SMS
+Parent SMS alerts. msg91.com. Rs.0.15-0.25 per SMS.
+
+===== PAGE 14 =====
+Page 13
+EduMind AI — PRD v1.0
+SECTION 10 — DATABASE SCHEMA (Supabase PostgreSQL)
+-- Enable pgvector
+CREATE EXTENSION IF NOT EXISTS vector;
+-- Schools
+CREATE TABLE schools (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text, type text, city text, board text, created_at timestamptz DEFAULT now());
+-- Users
+CREATE TABLE users (id uuid PRIMARY KEY REFERENCES auth.users(id),
+  email text, role text, school_id uuid REFERENCES schools(id),
+  full_name text, avatar_url text, language_pref text DEFAULT 'en');
+-- Notebooks & Sources
+CREATE TABLE notebooks (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id), title text, subject text,
+  created_at timestamptz DEFAULT now());
+CREATE TABLE sources (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  notebook_id uuid REFERENCES notebooks(id),
+  type text, file_url text, raw_text text, uploaded_at timestamptz DEFAULT now());
+-- Embeddings (pgvector)
+CREATE TABLE embeddings (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  source_id uuid REFERENCES sources(id),
+  chunk_text text, chunk_index int, embedding vector(768));
+CREATE INDEX ON embeddings USING ivfflat (embedding vector_cosine_ops);
+-- Quizzes & Results
+CREATE TABLE quizzes (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  teacher_id uuid REFERENCES users(id), class_id uuid,
+  title text, question_ids uuid[], time_limit_mins int, due_date timestamptz);
+CREATE TABLE quiz_submissions (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  quiz_id uuid REFERENCES quizzes(id), student_id uuid REFERENCES users(id),
+  answers jsonb, score numeric, ai_feedback jsonb, submitted_at timestamptz DEFAULT now
+());
+-- Events & Announcements
+CREATE TABLE announcements (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  school_id uuid REFERENCES schools(id), target text,
+  title text, body text, read_by uuid[] DEFAULT '{}', sent_at timestamptz DEFAULT now()
+);
+CREATE TABLE events (id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  school_id uuid REFERENCES schools(id), title text,
+  event_date timestamptz, venue text, rsvps jsonb DEFAULT '{}');
+
+===== PAGE 15 =====
+Page 14
+EduMind AI — PRD v1.0
+SECTION 11 — KEY PROMPT TEMPLATES (v1)
+Prompt 1 — RAG Tutoring Q&A;
+SYSTEM: You are EduMind, a helpful AI tutor for students.
+Answer ONLY from the provided source excerpts.
+Always cite: [Source: <filename>, Page <n>]
+If not in sources: "This topic isn't in your uploaded materials."
+Adapt to class level: {{class_level}}. Language: {{language}}.
+USER: Source excerpts:
+---
+{{retrieved_chunks}}
+---
+Question: {{student_question}}
+Prompt 2 — Mind Map JSON
+Return ONLY valid JSON. No preamble.
+Generate hierarchical mind map. Max 4 levels.
+Format: { "id": "root", "label": "max 5 words",
+  "summary": "1 sentence", "children": [] }
+Content: {{source_content}}
+Prompt 3 — Quiz Generator
+Generate quiz for {{board}} board, Class {{grade}}.
+{{n_mcq}} MCQ + {{n_short}} short answer questions.
+Each: { type, question, options, correct, explanation, topic, difficulty, skill }
+Difficulty: 30% Easy, 50% Medium, 20% Hard.
+Return ONLY JSON array.
+Content: {{chapter_content}}
+Prompt 4 — Multilingual Explanation
+Explain in {{regional_language}} with English technical terms.
+Use natural code-switching like a good coaching teacher.
+Explain to Class {{grade}} student: {{concept}}
+Give: 1. Simple explanation in {{language}} (3-4 sentences)
+      2. Real-life analogy student can relate to
+      3. Key formula or rule (in English)
+      4. One practice question with answer
+
+===== PAGE 16 =====
+Page 15
+EduMind AI — PRD v1.0
+SECTION 12 — USER STORIES
+Student Stories
+Story ID
+User Story
+US-S01
+As a student, I can upload my chapter PDF and ask questions, getting answers cited to specific
+pages.
+US-S02
+As a student, I can generate an interactive mind map of any topic to visualise how concepts
+connect.
+US-S03
+As a student, I can listen to a 10-minute Audio Overview of my notes while commuting.
+US-S04
+As a student, I can get AI-generated flashcards and practice with spaced repetition.
+US-S05
+As a student, I can receive concept explanations in Telugu/Hindi with English technical terms.
+US-S06
+As a student, I can upload my syllabus and exam dates to get a personalised study plan.
+Teacher Stories
+Story ID
+User Story
+US-T01
+As a teacher, I can upload my syllabus and get a full semester lesson plan in minutes.
+US-T02
+As a teacher, I can generate 30 quiz questions from a chapter with one click.
+US-T03
+As a teacher, I can see which students are at risk based on quiz performance and attendance.
+US-T04
+As a teacher, I can send a class announcement to all parents with read-confirmation.
+Parent Stories
+Story ID
+User Story
+US-P01
+As a parent, I can see my child's attendance for today within seconds of school start.
+US-P02
+As a parent, I can view the school event calendar and RSVP to Annual Day.
+US-P03
+As a parent, I receive school announcements in my preferred language (Telugu/Hindi).
+US-P04
+As a parent, I get an immediate push notification if my child is marked absent.
+ EduMind AI — PRD v1.0 | Built by Aditya | Tutoring · Planner · Assessment · Comms · Skills
+
+===== PAGE 17 =====
+Version 2.0
+ 100% Free Stack Edition
+ Google Auth · Gemini Flash · Groq · Supabase Free · Vercel Free
+ Streaks · Badges · Mind Maps · Voice Notes (Granola-style) · Timer + Music · Timetable ·
+ Leaderboard
+ Total Monthly Cost: ■0
+
+===== PAGE 18 =====
+Page 1
+EduMind AI — PRD v2.0 | 100% Free Stack
+ EduMind AI
+ Complete Product Build PRD — v2.0
+ 100% Free Stack Edition
+ Google Auth · Gemini Flash · Groq · Supabase Free · Vercel Free · Web Speech API
+ Streaks · Badges · Mind Maps · Voice Notes · Timetable · Timer + Music · Leaderboard
+ Prepared by Aditya | React + Supabase (Free) + Vercel (Free) + 0-cost AI APIs
+ Total Monthly Cost: ■0
+
+===== PAGE 19 =====
+Page 2
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 1 — PROBLEM STATEMENT
+EduMind AI solves a tightly connected cluster of pain points facing students, parents, and teachers — especially
+in Indian engineering colleges and Tier 2/3 city schools.
+1.1 Student Pain Points
+What Students Are Struggling With
+■ Rote Learning: 76.6% of Class 3 students cannot read grade-level text (ASER 2024). No conceptual
+understanding.
+■ Exam Anxiety: No personalised support — same lesson delivered to 40+ students at wildly different
+levels.
+■ Zero After-Hours Help: Teacher unavailable after school; doubt resolution delayed by days.
+■■ No Study Roadmap: Students don't know what to study, in what order, or how to track progress.
+■ Language Barrier: Concepts taught in English; many students think in Telugu/Hindi/Tamil.
+■ No Motivation System: No streaks, badges, or leaderboard to sustain daily study habits.
+■ Distraction: No structured focus mode (Pomodoro timer + music) to block distractions during study
+sessions.
+1.2 Teacher Pain Points
+What Teachers Are Struggling With
+■ Admin Overload: 30-40% of time on paperwork, attendance, non-teaching duties (UDISE data).
+■ Manual Lesson Planning: Hours of preparation per chapter — zero AI assistance available.
+■ Communication Chaos: 3-4 WhatsApp groups per class — no read receipts, buried messages,
+wrong-group sends.
+■ No Analytics: Cannot identify struggling students without manual checking of every submission.
+■ Quiz Creation Tedious: Making randomised paper variants to prevent copying takes hours.
+1.3 Parent Pain Points
+What Parents Are Struggling With
+■ Zero Real-Time Visibility: Attendance, homework, exam dates scattered across WhatsApp messages.
+■ Event Misses: Annual Day, fee deadlines, PTMs — buried under birthday wishes in group chats.
+■ Fee Confusion: No clear history of what's paid, pending, or due — leads to disputes.
+■ Late Warning: Parents discover child is struggling only at exam time — too late to intervene.
+
+===== PAGE 20 =====
+Page 3
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 2 — PRODUCT VISION & MODULES
+ "Every student gets a personalised AI tutor. Every teacher gets a co-pilot. Every parent
+ gets real-time school visibility. All free."
+Eight Core Modules
+Module
+Description
+Module 1 — AI Study
+Companion
+Source-grounded Q&A;, mind maps, audio overviews, flashcards, quizzes
+(NotebookLM-style). Powered by Gemini Flash.
+Module 2 — Study Planner
+Syllabus-to-plan converter, spaced repetition scheduling, mastery heatmap,
+daily focus sessions.
+Module 3 — Assessment Engine
+Quiz generator, auto-grader, rubric feedback, skill reports, viva simulator.
+Module 4 — Teacher Co-Pilot
+Lesson planner, worksheet generator, class analytics dashboard, at-risk
+student flags.
+Module 5 — School Comms &
+Events
+Announcements (with read-confirm), event calendar, RSVP, fee alerts, PTM
+scheduler.
+Module 6 — Skill Navigator
+Role-gap analysis, personalised learning paths, portfolio builder, digital
+badges for colleges.
+Module 7 — Gamification
+Study streaks, XP points, 25 achievement badges, class leaderboard —
+keeps students returning daily.
+Module 8 — Focus &
+Productivity
+Pomodoro timer, lo-fi/binaural music, AI voice notes (Granola-style), smart
+timetable manager.
+
+===== PAGE 21 =====
+Page 4
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 3 — 100% FREE TECHNOLOGY STACK — TOTAL COST:
+■0/MONTH
+Every tool below has a permanent free tier — no credit card required, no trial expiry. Build, demo, and run early
+pilots entirely on this stack.
+3.1 Authentication — Google OAuth via Supabase (Free)
+Google Sign-In Setup
+Provider: Supabase Auth with Google OAuth — completely free, unlimited users.
+User data saved: uid, email, full_name, avatar_url, role (student/teacher/parent/admin), school_id.
+Setup path: Supabase Dashboard → Auth → Providers → Google → add Client ID + Secret.
+Google Cloud Console: console.cloud.google.com → APIs → Credentials → OAuth 2.0 Client ID → Web
+Application.
+Authorised redirect URI: https://YOUR_PROJECT.supabase.co/auth/v1/callback
+Cost: FREE — Google OAuth has no cost at any volume.
+Streaks & badges persist: Since user is logged in via Google, all XP, streaks, and badges sync across
+devices.
+3.2 Primary LLM — Gemini 2.5 Flash (Google AI Studio, Free)
+Gemini 2.5 Flash — Free Tier Details
+Get key: aistudio.google.com → "Get API key" — no credit card, instant.
+Free limits: 1,500 requests/day, 1 million token context window per request.
+Capabilities: Text + images + audio + video in same call — covers ALL tutoring needs.
+Also covers: Embeddings (text-embedding-004, 768-dim) — same free key, no extra cost.
+Use for: RAG tutoring Q&A;, quiz generation, lesson planning, mind map JSON, voice note processing.
+SDK: npm install @google/generative-ai
+ENV VAR: VITE_GEMINI_API_KEY=AIzaxxxxxxxxxxxxxxxxxxxxxxxx
+3.3 Speed Fallback LLM — Groq / Llama 3 (Free)
+Groq Free Tier
+Get key: console.groq.com/keys — sign up with Google, free key instantly.
+Free limits: 14,400 requests/day; 30 RPM (requests per minute).
+Speed: 300+ tokens/second — fastest free inference available anywhere.
+Use when: Gemini daily limit hit; real-time chat responses; quick flashcard generation.
+
+===== PAGE 22 =====
+Page 5
+EduMind AI — PRD v2.0 | 100% Free Stack
+Model: llama-3.3-70b-versatile (most capable) or llama-3.1-8b-instant (fastest).
+SDK: OpenAI-compatible — use openai npm package with baseURL override.
+ENV VAR: VITE_GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxx
+3.4 Text-to-Speech — Web Speech API + Google Cloud TTS (Free)
+Voice Output — Two Free Options
+Option A — Web Speech API (zero setup): window.speechSynthesis.speak(new
+SpeechSynthesisUtterance(text))
+Built into Chrome/Edge/Firefox. Unlimited. Supports multiple voices, speed control. Works offline.
+Option B — Google Cloud TTS (higher quality): 1 million Standard characters/month FREE.
+40+ languages including Hindi (hi-IN) and Telugu (te-IN) — perfect for multilingual audio overviews.
+Get key: console.cloud.google.com → Enable "Cloud Text-to-Speech API".
+ENV VAR: VITE_GOOGLE_TTS_KEY=AIzaxxxxxxxxxxxxxxxxxxxxxxxx (same Google project)
+3.5 Speech-to-Text — Web Speech API (Voice Notes, Zero Cost)
+Voice Note Capture — Browser-Native, Free
+Technology: Web SpeechRecognition API — built into all modern browsers. No API key. No cost.
+Languages: English (en-IN), Hindi (hi-IN), Telugu (te-IN), Tamil (ta-IN) — all free.
+Code: const recognition = new window.SpeechRecognition(); recognition.lang = "en-IN"; recognition.start();
+Real-time: Transcript appears word-by-word as student speaks.
+After capture: Transcript sent to Gemini Flash → structured notes returned in under 3 seconds.
+3.6 Database — Supabase Free Plan
+Supabase Free Tier — What You Get
+PostgreSQL database: 500 MB — enough for thousands of students.
+Auth: Unlimited users — Google OAuth + email/password, both free.
+Storage: 1 GB — uploaded PDFs, images, audio files.
+Realtime: Built-in subscriptions — parent attendance alerts, live quiz scores.
+pgvector: Built-in vector similarity search — no Pinecone needed.
+Edge Functions: 500,000 invocations/month free — AI orchestration serverless.
+Limit: 2 free projects; pauses after 1 week inactivity (resumable in 1 click).
+3.7 Hosting — Vercel Hobby Plan (Free)
+
+===== PAGE 23 =====
+Page 6
+EduMind AI — PRD v2.0 | 100% Free Stack
+Vercel Free Tier
+Frontend hosting: Unlimited deploys, custom domain support.
+Serverless functions: 100 GB-hours/month — for AI API routes and webhooks.
+CDN: Global edge network — fast load times across India.
+Deploy: Connect GitHub → auto-deploy on every push. Zero config.
+Bandwidth: 100 GB/month — fine for school pilots.
+3.8 Push Notifications — OneSignal (Free, Unlimited)
+OneSignal Web Push
+Cost: Completely FREE — unlimited web push notifications forever.
+Get key: onesignal.com → Create App → Web Push.
+Use for: Streak reminder ("Don't break your ■14-day streak!"), attendance alerts, event notices.
+SDK: npm install react-onesignal
+ENV VAR: VITE_ONESIGNAL_APP_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+3.9 Focus Music — All Free
+Music Options for Timer Mode
+Option A — YouTube iFrame: Embed curated lo-fi study playlists. No API key needed for basic embed.
+Option B — Tone.js: Generate ambient/binaural beats programmatically in browser. npm install tone.
+Free/open-source.
+Alpha waves (10 Hz): relaxed focus. Beta waves (20 Hz): active problem solving.
+Option C — Bundled tracks: Creative Commons rain, café, nature sounds stored in Supabase Storage
+(free).
+
+===== PAGE 24 =====
+Page 7
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 4 — COMPLETE .env FILE — ALL FREE, NO CREDIT CARD
+# ■■ AI APIs (All Free, No Credit Card) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+# Get at: aistudio.google.com
+VITE_GEMINI_API_KEY=AIzaxxxxxxxxxxxxxxxxxxxxxxxx
+# Get at: console.groq.com/keys
+VITE_GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxx
+# Same Google key — covers Gemini + TTS + Translate
+VITE_GOOGLE_TTS_KEY=AIzaxxxxxxxxxxxxxxxxxxxxxxxx
+# Optional: YouTube Data API v3 (free: 10K units/day)
+VITE_YOUTUBE_API_KEY=AIzaxxxxxxxxxxxxxxxxxxxxxxxx
+# ■■ Supabase (Free Plan) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+■
+# Get at: supabase.com → New Project → Settings → API
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ■■ Google OAuth (Free — same Google Cloud project) ■■■■■■■■■■■■■■■■■■■■■■
+# Get at: console.cloud.google.com → APIs → Credentials → OAuth 2.0
+# Add to Supabase: Dashboard → Auth → Providers → Google
+GOOGLE_OAUTH_CLIENT_ID=xxxxxx.apps.googleusercontent.com
+GOOGLE_OAUTH_CLIENT_SECRET=GOCSPX-xxxxxxxxxxxxxxxx
+# ■■ Push Notifications (Free, Unlimited) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+# Get at: onesignal.com → Create App → Web Push
+VITE_ONESIGNAL_APP_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+# TOTAL MONTHLY COST: Rs. 0
+
+===== PAGE 25 =====
+Page 8
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 5 — GAMIFICATION — STREAKS, BADGES &
+LEADERBOARD
+Motivation is the #1 drop-off reason in ed-tech. EduMind AI uses a full gamification layer — streaks, XP points,
+25 achievement badges, and a class leaderboard — to keep students returning every day.
+5.1 Study Streaks
+Streak System Design
+■ Daily Streak: Student earns +1 streak day for completing at least 1 study session or quiz that day.
+Stored in: user_streaks { user_id, current_streak, longest_streak, last_study_date, freeze_count }
+Display: Flame icon with streak count on home screen — visible motivation.
+Reset: If no activity by midnight (IST), streak resets to 0.
+Freeze: Student uses a "Streak Freeze" badge to protect streak for 1 missed day.
+Streak Milestones (trigger badge unlock + bonus XP):
+■ 3 days: "Getting Started" badge
+■ 7 days: "Week Warrior" badge + 50 bonus XP
+■ 14 days: "Fortnight Focused" badge + 100 bonus XP
+■ 30 days: "Monthly Master" badge + 250 bonus XP + Streak Freeze unlocked
+■ 60 days: "Exam Season Survivor" + 500 bonus XP
+■ 100 days: "Century Club" badge + 1000 bonus XP + special profile border
+■ Streak Nudge: If student hasn't studied by 7 PM → OneSignal push notification:
+"Don't break your ■ 12-day streak! Complete a quick 5-question quiz now."
+5.2 XP Points System
+Action
+XP Earned
+Complete a study session (any duration)
++10 XP
+Finish a full flashcard deck
++15 XP
+Score 80%+ on a quiz
++25 XP
+Score 100% on a quiz
++50 XP + "Perfect Score" badge
+Upload a study material (PDF/image)
++5 XP
+Generate a mind map
++10 XP
+
+===== PAGE 26 =====
+Page 9
+EduMind AI — PRD v2.0 | 100% Free Stack
+Listen to a full audio overview
++10 XP
+Complete a Pomodoro timer session
++20 XP
+Record an AI voice note
++8 XP
+Maintain a 7-day streak
++50 bonus XP
+Complete a Skill Navigator module
++40 XP
+Earn a new badge
++30 XP
+5.3 Achievement Badges (25 Total)
+Streak Badges
+■ Getting Started (3-day) | Week Warrior (7-day) | Fortnight Focused (14-day) | Monthly Master (30-day) |
+Century Club (100-day)
+Subject Mastery Badges
+■ Science Star: Score 80%+ in 5 Physics/Chemistry quizzes
+■ Math Wizard: Score 100% on 3 consecutive maths quizzes
+■ Essay Expert: Submit 10 essays with AI rubric feedback
+■■ Code Ninja: Complete 5 coding assessments
+Study Habit Badges
+■ Early Bird: Complete a session before 7 AM, 3 different days
+■ Night Owl: Complete a session after 10 PM, 3 different days
+■ Focus Master: Complete 10 Pomodoro sessions total
+■ Bookworm: Upload 20+ study sources across notebooks
+■■ Mind Mapper: Generate 10 mind maps
+Social & Special Badges
+■ Study Buddy: Join or create a study group
+■ Class Topper: Rank #1 on the weekly class leaderboard
+■ Helpful Peer: Share 5 notebooks with classmates
+■ Diamond Scholar: Earn all four Subject Mastery badges
+■ Speed Learner: Complete a chapter quiz in under 5 min with 90%+
+■ Streak Saver: Use a Freeze badge to protect a 30+ day streak
+■ Skill Complete: Finish a full Skill Navigator learning path
+5.4 Class Leaderboard
+
+===== PAGE 27 =====
+Page 10
+EduMind AI — PRD v2.0 | 100% Free Stack
+Leaderboard Design
+Scope: Per-class weekly leaderboard (not school-wide — reduces unhealthy pressure, increases
+relevance).
+Tabs: "This Week" | "This Month" | "All Time"
+Display: Rank · Google avatar · Name · XP earned · Top badge · Streak count
+Student's own row always visible (even if rank 35 out of 40).
+Weekly Rewards (announced every Monday via school announcement):
+■ Rank 1: "Class Topper" badge + 100 bonus XP + featured in school announcement feed.
+■ Rank 2-3: "Top 3" badge + 50 XP.
+■ Most Improved: "Comeback Kid" badge + 40 XP (biggest XP gain vs previous week).
+Privacy: Students can opt out. Names show as "Anonymous" if opted out.
+Live updates: Supabase Realtime pushes leaderboard changes instantly to all class members.
+
+===== PAGE 28 =====
+Page 11
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 6 — AI VOICE NOTES — GRANOLA-STYLE
+Granola is an AI meeting note-taker that converts spoken recordings into structured notes. EduMind brings the
+same concept to lectures and study sessions — using the browser's built-in Web Speech API (zero cost).
+6.1 Voice Note Flow
+Step
+What Happens
+1 — Record
+Student taps "Record" button. Web SpeechRecognition API activates. Real-time transcript
+appears on screen as student speaks.
+2 — Speak
+Student speaks naturally: "Today in Physics we covered Newton's Three Laws. Miss mentioned
+F=ma. I didn't understand friction coefficients."
+3 — Done
+Student taps "Done". Raw transcript sent to Gemini Flash API for processing.
+4 — AI Output
+Gemini returns structured JSON: { title, key_concepts, formulas, important_points,
+doubts_to_clarify, practice_questions }
+5 — Display
+Structured notes displayed with clear sections. +8 XP awarded. Notes saved to Supabase and
+embedded for RAG search.
+6 — Actions
+Buttons: [Make Flashcards] [Add to Notebook] [Ask AI about this] — all powered by the same
+voice note content.
+6.2 Voice Note Prompt
+const prompt = `
+Convert this raw lecture transcript into structured study notes.
+Return JSON only:
+{
+  "title": "auto-generated descriptive title",
+  "subject": "detected subject",
+  "key_concepts": ["list of main concepts"],
+  "formulas": ["list of formulas — empty array if none"],
+  "important_points": ["bullet list of key facts"],
+  "doubts_to_clarify": ["questions to ask the teacher"],
+  "practice_questions": ["3 questions with answers"]
+}
+TRANSCRIPT: {{transcript}}`
+
+===== PAGE 29 =====
+Page 12
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 7 — TIMER MODE + FOCUS MUSIC
+A built-in Pomodoro timer with ambient focus music — no external apps needed. Completing a session earns
+XP and counts toward the daily study streak.
+7.1 Timer Modes
+Mode
+Duration & Description
+Pomodoro Classic
+25 min study → 5 min break → repeat 4x → 15 min long break. Most popular focus
+technique.
+Deep Work
+50 min study → 10 min break. For maths derivations, essay writing, complex coding.
+Quick Revision
+15 min study → 3 min break. For flashcard reviews before exams.
+Custom
+Student sets own study/break duration. Preference saved per user in Supabase.
+Exam Simulation
+Full exam duration (e.g., 3 hrs), no breaks, no music — builds exam stamina.
+7.2 Focus Music (All Free)
+Music Options
+■ Lo-Fi YouTube: Embed curated study playlists via YouTube iFrame API — no API key for basic embed.
+■ Binaural Beats (Tone.js): Generated in-browser — zero cost, zero API.
+Alpha waves (10 Hz): relaxed focus. Beta waves (20 Hz): active problem-solving.
+■■ Ambient Sounds: Creative Commons rain, café, forest sounds — bundled in Supabase Storage.
+■ Silent Mode: Timer only, no music — for students who prefer quiet.
+Volume control: 0–100% slider. Music auto-fades during break periods.
+7.3 Timer Features
+Timer Behaviour & UX
+■ Break alerts: Soft chime + push notification when study period ends.
+■ Session log: "Today: 4 sessions, 100 minutes studied" — shown on home dashboard.
+■ Streak counted: Completing a Pomodoro counts as a study session for daily streak.
+■ XP: +20 XP per completed Pomodoro session.
+■ Background persistence: Timer continues if tab closed or phone locked (service worker).
+■ Subject tag: Before starting, student picks subject — timer auto-tags the session log.
+■ Weekly report: "This week: 8.5 hours studied across 17 Pomodoros."
+
+===== PAGE 30 =====
+Page 13
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 8 — TIMETABLE MANAGER
+A smart timetable combining the school class schedule with AI-injected study sessions — a single view of the
+student's entire academic day.
+Timetable Features
+■ Class Schedule: Student enters (or teacher broadcasts) the weekly class timetable.
+Mon: Physics 8–9AM | Chemistry 9–10AM | Maths 11AM–12PM ...
+■ AI Study Injection: AI fills free periods with recommended sessions based on:
+→ Upcoming exam deadlines (prioritises closest)
+→ Weakest topics from mastery heatmap
+→ Spaced repetition schedule for due flashcard decks
+■ Views: Day view (timeline) + Week view (grid). Toggle between both.
+■ Class Reminders: Push notification 10 minutes before each class.
+■ Homework Tracker: Add assignments with subject and due date.
+AI suggests which free period to complete each homework. Check off when done → +5 XP.
+■ Teacher Sync: Teacher broadcasts official timetable to all class students via Supabase Realtime.
+Students receive it instantly — no manual entry needed.
+
+===== PAGE 31 =====
+Page 14
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 9 — MODULE 1 — AI STUDY COMPANION
+(NotebookLM-Style)
+The core student experience. All features powered by Gemini Flash (free). Students upload any study material
+and get AI-powered learning tools built on top of it.
+9.1 RAG-Powered Q&A;
+Source-Grounded Tutoring
+■ Sources: Upload PDFs, paste text, add YouTube links, snap photos of textbook pages.
+■ RAG: Gemini text-embedding-004 → pgvector similarity search → Gemini Flash for grounded answer.
+■ Citations: Every answer shows "Source: Page 14, Chapter 3 — Thermodynamics.pdf"
+■ Multilingual: "Explain this in Telugu" — Gemini handles code-switching natively.
+■ Vision: Photo of blackboard → Gemini Vision reads diagram and explains it.
+■ Socratic Mode: "Don't give the answer — tell me which concept I'm missing."
+9.2 Interactive Mind Maps
+Mind Map Generation
+■■ Generation: Student clicks "Mind Map" → Gemini returns hierarchical JSON tree structure.
+■ Rendering: React Flow library renders interactive, zoomable, pannable mind map.
+■■ Click to Chat: Click any node → opens focused Q&A; on that specific sub-topic.
+■ Export: Download as PNG. Share link with classmates.
+✏■ Manual Edit: Add, remove, or rename nodes. Annotate with personal notes.
+■ Auto-update: Regenerate map when new sources are added to the notebook.
+9.3 Audio Overviews (3 Formats)
+Audio Formats
+Brief: Single AI voice. Concise 3–5 min summary. Web Speech API (free).
+Debate: Two AI "speakers" argue opposite perspectives — great for essays and history topics.
+Deep Dive: Step-by-step technical walkthrough. Ideal for maths derivations and science processes.
+TTS: Web Speech Synthesis API (free, unlimited) + Google Cloud TTS for higher voice quality.
+Transcript displayed alongside audio. Speed control: 0.75x to 2x.
+9.4 Flashcards + Spaced Repetition
+
+===== PAGE 32 =====
+Page 15
+EduMind AI — PRD v2.0 | 100% Free Stack
+Smart Flashcard System
+■ Auto-generation: Gemini creates 10–20 flashcards per chapter from uploaded content.
+■ SM-2 Algorithm (same as Anki): Schedules next review based on recall difficulty.
+Correct → next review: 1 day → 3 → 7 → 21 → 60 days.
+Wrong → back to 1 day.
+■ Progress: % cards mastered shown per deck on study dashboard.
+■ Share: Send flashcard deck link to classmates via unique URL.
+
+===== PAGE 33 =====
+Page 16
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 10 — COMPLETE SYSTEM ARCHITECTURE
+10.1 Three-Layer Stack
+Layer 1 — Data (Supabase Free)
+Storage: PDFs, images, audio (1 GB free)
+Auth: Google OAuth + email/password (unlimited users, free)
+Database: PostgreSQL with pgvector — users, notebooks, XP, streaks, badges, leaderboard, timetable,
+events
+Realtime: Live parent alerts, quiz scores, leaderboard updates
+Edge Functions: 500K/month free — AI orchestration serverless
+Row-Level Security: Each user sees only their school's data
+Layer 2 — AI (All Free APIs)
+Primary LLM: Gemini 2.5 Flash (aistudio.google.com — 1,500 req/day free, no card)
+Fallback LLM: Groq Llama 3.3 70B (console.groq.com — 14,400 req/day free, no card)
+Embeddings: Gemini text-embedding-004 — same free key, 768-dim → pgvector
+Voice STT: Web SpeechRecognition API — browser-native, no API key, unlimited
+Voice TTS: Web Speech Synthesis API + Google Cloud TTS (1M chars/month free)
+Vision: Gemini Flash vision — processes blackboard photos, diagrams, scanned pages
+Translation: Gemini Flash handles multilingual natively — no separate translate API
+Layer 3 — Application (Vercel Free)
+Frontend: React (Vite) + Tailwind CSS + shadcn/ui — mobile-first PWA
+API Routes: Vercel Serverless Functions — AI orchestration, streak cron, badge logic
+Deploy: Vercel Hobby (free) — connect GitHub → auto-deploy on every push
+PWA: Service worker for offline flashcard review and background timer
+Notifications: OneSignal (free, unlimited web push)
+Mind Maps: React Flow library (open-source, free)
+Music: Tone.js (browser-native) + YouTube iFrame embed
+10.2 RAG Pipeline — Step by Step
+Step
+Action
+1 — Upload
+Student uploads PDF → stored in Supabase Storage → file URL saved to sources table.
+
+===== PAGE 34 =====
+Page 17
+EduMind AI — PRD v2.0 | 100% Free Stack
+2 — Extract
+Edge Function: extract text with pdf-parse (npm). Photos: Gemini Vision API.
+3 — Chunk
+Split text into 512-token chunks with 50-token overlap (LangChain TextSplitter).
+4 — Embed
+Each chunk → Gemini text-embedding-004 → 768-dim vector stored in pgvector.
+5 — Query
+Student asks question → embed question → pgvector cosine similarity → top 5 chunks.
+6 —
+Generate
+Top 5 chunks + question → Gemini Flash → grounded answer with page citations.
+7 — Display
+Answer shown in chat. Citation links to source page. +8 XP for asking a question.
+10.3 Gamification Data Flow
+Event
+System Action
+Quiz completed
+Score saved → XP calculated → user_xp updated → leaderboard refreshed via Supabase
+Realtime.
+Midnight cron
+Edge Function checks last_study_date → resets streak if no activity → push notification
+sent.
+Badge trigger
+After XP-earning action → check badge conditions → if met → insert user_badges → push
+"New badge!".
+Weekly reset
+Sunday midnight IST → snapshot top 3 → school announcement → reset xp_week column.
+Pomodoro done
+Timer fires POST → /api/session-complete → +20 XP → streak extended → session
+logged.
+
+===== PAGE 35 =====
+Page 18
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 11 — DATABASE SCHEMA — SUPABASE SQL
+Run this SQL in your Supabase SQL Editor to create all required tables.
+-- Step 1: Enable pgvector extension
+CREATE EXTENSION IF NOT EXISTS vector;
+-- Schools
+CREATE TABLE schools (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text NOT NULL, type text, city text, state text, board text,
+  created_at timestamptz DEFAULT now());
+-- Users (linked to Supabase Auth via Google OAuth)
+CREATE TABLE users (
+  id uuid PRIMARY KEY REFERENCES auth.users(id),
+  email text UNIQUE NOT NULL, full_name text, avatar_url text,
+  role text CHECK (role IN ('student','teacher','parent','admin')),
+  school_id uuid REFERENCES schools(id), language_pref text DEFAULT 'en',
+  created_at timestamptz DEFAULT now());
+-- XP and Streaks (gamification)
+CREATE TABLE user_xp (
+  user_id uuid PRIMARY KEY REFERENCES users(id),
+  xp_total int DEFAULT 0, xp_week int DEFAULT 0, xp_month int DEFAULT 0,
+  updated_at timestamptz DEFAULT now());
+CREATE TABLE user_streaks (
+  user_id uuid PRIMARY KEY REFERENCES users(id),
+  current_streak int DEFAULT 0, longest_streak int DEFAULT 0,
+  last_study_date date, freeze_count int DEFAULT 0);
+CREATE TABLE user_badges (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id),
+  badge_id text NOT NULL, earned_at timestamptz DEFAULT now());
+-- Notebooks and Sources
+CREATE TABLE notebooks (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id), title text, subject text,
+  created_at timestamptz DEFAULT now());
+CREATE TABLE sources (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  notebook_id uuid REFERENCES notebooks(id),
+  type text, file_url text, raw_text text,
+  uploaded_at timestamptz DEFAULT now());
+
+===== PAGE 36 =====
+Page 19
+EduMind AI — PRD v2.0 | 100% Free Stack
+-- Embeddings (pgvector — 768 dimensions for Gemini)
+CREATE TABLE embeddings (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  source_id uuid REFERENCES sources(id),
+  chunk_text text, chunk_index int, embedding vector(768));
+CREATE INDEX ON embeddings USING ivfflat (embedding vector_cosine_ops);
+-- Timer Sessions
+CREATE TABLE timer_sessions (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id), subject text, mode text,
+  duration_mins int, completed_at timestamptz DEFAULT now());
+-- Timetable
+CREATE TABLE timetable_slots (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id), class_id uuid,
+  day_of_week int, start_time time, end_time time, subject text,
+  slot_type text CHECK (slot_type IN ('class','study','break','exam')));
+-- Voice Notes
+CREATE TABLE voice_notes (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id), notebook_id uuid REFERENCES notebooks(id),
+  raw_transcript text, ai_notes jsonb, subject text, topic text,
+  created_at timestamptz DEFAULT now());
+-- Communications and Events
+CREATE TABLE announcements (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  school_id uuid REFERENCES schools(id), author_id uuid REFERENCES users(id),
+  target text, title text, body text,
+  read_by uuid[] DEFAULT '{}', sent_at timestamptz DEFAULT now());
+CREATE TABLE events (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  school_id uuid REFERENCES schools(id),
+  title text, description text, event_date timestamptz, venue text,
+  rsvps jsonb DEFAULT '{}');
+
+===== PAGE 37 =====
+Page 20
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 12 — GEMINI API PROMPT TEMPLATES
+Drop these into Vercel API routes or Supabase Edge Functions.
+Prompt 1 — RAG Tutoring Q&A;
+const prompt = `
+You are EduMind AI, a helpful tutor for Indian students.
+Answer ONLY using the provided source excerpts.
+Cite sources as: [Source: <filename>, Page <n>]
+If answer not in sources, say: "This is not in your uploaded materials."
+Explain at class level: {{grade}}. Language: {{language}}.
+SOURCE EXCERPTS:
+{{retrieved_chunks}}
+STUDENT QUESTION: {{question}}
+Answer step-by-step with citation at end.`
+Prompt 2 — Mind Map JSON
+const prompt = `
+Return ONLY valid JSON. No preamble. No explanation.
+Generate a hierarchical mind map. Max 4 levels deep.
+Format: { "id": "root", "label": "max 5 words",
+  "summary": "1 sentence", "children": [] }
+CONTENT: {{source_text}}
+Return the JSON now.`
+Prompt 3 — Quiz Generator
+const prompt = `
+Generate a quiz for {{board}} board, Class {{grade}}.
+{{n_mcq}} MCQ + {{n_short}} short answer questions.
+Each: { type, question, options, correct, explanation, topic, difficulty }
+Difficulty: 30% Easy, 50% Medium, 20% Hard.
+Return ONLY a JSON array.
+CONTENT: {{content}}`
+Prompt 4 — Lesson Planner (Teacher Co-Pilot)
+const prompt = `
+Create a detailed lesson plan for:
+Subject: {{subject}} | Topic: {{topic}} | Class: {{grade}} | Duration: {{mins}} min
+Include: Learning Objectives (3-4), Materials Needed,
+Lesson Flow with timing, Opening Hook (5 min),
+
+===== PAGE 38 =====
+Page 21
+EduMind AI — PRD v2.0 | 100% Free Stack
+Main Teaching, Student Activity, Formative Assessment,
+Homework, Differentiation (support weak / challenge advanced).
+Format as structured markdown.`
+
+===== PAGE 39 =====
+Page 22
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 13 — LOVABLE.DEV BUILD PROMPT — PASTE DIRECTLY
+Copy this entire prompt into Lovable.dev to scaffold the Phase 1 MVP.
+Build "EduMind AI" — an AI study companion with gamification.
+Stack: React + Vite + Tailwind CSS + shadcn/ui + Supabase + Vercel (all free).
+AUTH: Google Sign-In via Supabase Auth Google OAuth.
+→ Save: { id, email, full_name, avatar_url, role="student" } to users table.
+→ Role selection screen on first login: Student / Teacher / Parent.
+STUDENT HOME DASHBOARD:
+→ Top bar: Google avatar, streak flame (e.g. ■ 12), XP total (e.g. 1240 XP)
+→ Weekly leaderboard card: top 3 classmates + student own rank
+→ Today's timetable: 3 AI-suggested study sessions
+→ Quick actions: [Start Timer] [New Voice Note] [Open Notebook]
+NOTEBOOK MODULE:
+→ Create notebooks per subject. Upload PDFs to Supabase Storage.
+→ Chat with AI (Gemini Flash via Vercel function) about uploaded content.
+→ Buttons per notebook: [Mind Map] [Flashcards] [Quiz] [Audio Overview] [Voice Note]
+→ Mind map: Gemini returns JSON → React Flow renders interactive tree.
+GAMIFICATION:
+→ user_xp and user_streaks tables in Supabase
+→ XP earned: quiz (+25), flashcard (+15), timer (+20), voice note (+8)
+→ Badge toast notification on new badge unlock
+→ Leaderboard: class-filtered, weekly XP ranking, Supabase Realtime live.
+TIMER MODE:
+→ Pomodoro (25/5) | Deep Work (50/10) | Custom → user picks subject.
+→ Music: Lo-fi YouTube embed + Tone.js binaural beats + silent mode.
+→ Complete timer → +20 XP → streak extended → session logged.
+VOICE NOTES:
+→ Web SpeechRecognition API (no API key) captures student speech.
+→ Transcript → Gemini Flash → structured JSON notes.
+→ Display: Title, Key Concepts, Formulas, Doubts, Practice Questions.
+TIMETABLE:
+→ Weekly grid (Mon-Sat). Student enters class slots.
+→ AI fills free slots with study sessions based on weak topics + exam dates.
+SUPABASE TABLES:
+users, user_xp, user_streaks, user_badges, notebooks, sources,
+embeddings (vector 768), voice_notes, timer_sessions,
+timetable_slots, announcements, events
+ENV VARS:
+VITE_GEMINI_API_KEY, VITE_GROQ_API_KEY,
+
+===== PAGE 40 =====
+Page 23
+EduMind AI — PRD v2.0 | 100% Free Stack
+VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, VITE_ONESIGNAL_APP_ID
+DESIGN: Clean mobile-first. Indigo/violet palette. Bottom nav mobile.
+Dark mode toggle. Card-based layout. Student-friendly.
+
+===== PAGE 41 =====
+Page 24
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 14 — FREE STACK SUMMARY — ■0/MONTH TOTAL
+Service
+Free Tier & Signup Link
+Gemini Flash + Embeddings
+aistudio.google.com — 1,500 req/day, 1M context, vision, no credit card
+Groq / Llama 3
+console.groq.com/keys — 14,400 req/day, fastest free inference, no credit card
+Supabase
+supabase.com — 500MB DB, 1GB Storage, realtime, pgvector, unlimited auth
+Vercel
+vercel.com — unlimited deploys, 100GB bandwidth, serverless functions
+Google OAuth
+console.cloud.google.com — unlimited sign-ins, completely free
+Google Cloud TTS
+console.cloud.google.com — 1M standard chars/month, Hindi + Telugu voices
+Web Speech API
+Browser built-in — STT + TTS, no API key, unlimited, works offline
+OneSignal
+onesignal.com — unlimited web push notifications, free forever
+React Flow
+reactflow.dev — open-source mind map rendering, npm install reactflow
+Tone.js
+tonejs.github.io — browser audio generation for binaural beats, open-source
+TOTAL COST
+Rs. 0 per month — build, demo, and run pilot schools entirely for free
+When to Upgrade (Optional — Not Required for MVP)
+Trigger
+What to Add
+500+ daily active students
+Supabase Pro ($25/mo) for more DB + storage + functions
+Gemini 1,500 req/day limit hit
+Add Groq as primary (14,400/day) and use Gemini as backup
+School wants fee collection
+Razorpay (free signup, 2% per transaction)
+Need SMS for
+non-smartphone parents
+MSG91 (~Rs. 500/mo for 3,000 SMS)
+
+===== PAGE 42 =====
+Page 25
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 15 — 3-WEEK HACKATHON BUILD SEQUENCE
+Day
+Build Target
+Day 1
+Supabase: create all tables, enable pgvector, configure Google OAuth. Test sign-in.
+Day 2
+React scaffold: Vite + Tailwind + shadcn/ui. Role-based routing for student/teacher/parent.
+Day 3
+PDF upload → Supabase Storage → pdf-parse text extraction → chunking → Gemini embed →
+pgvector.
+Day 4
+Gemini RAG chat: retrieve chunks → Gemini Flash → answer with citation in chat UI.
+Day 5
+Flashcard generator: Gemini prompt → JSON cards → SM-2 spaced repetition flip-card UI.
+Day 6
+Quiz generator + auto-grader: Gemini MCQ prompt → quiz UI → instant score + XP award.
+Day 7
+Mind map: Gemini JSON output → React Flow render → click node → focused chat.
+Day 8
+XP + Streaks: implement user_xp and user_streaks logic; flame icon on home dashboard.
+Day 9
+Badge system: 10 starter badges; Supabase check logic; toast notification on unlock.
+Day 10
+Leaderboard: class-filtered weekly XP table; Supabase Realtime live updates.
+Day 11
+Timer mode: Pomodoro + Deep Work. Tone.js binaural. YouTube lo-fi embed. +20 XP.
+Day 12
+Voice notes: Web SpeechRecognition → transcript → Gemini → structured notes display.
+Day 13
+Timetable: weekly grid input + AI study slot injection based on weak topics.
+Day 14
+Audio overview: Gemini script → Web Speech Synthesis + transcript panel.
+Day 15
+School comms: announcement create/send + parent read-confirmation system.
+Day 16
+Teacher co-pilot: lesson planner (Gemini) + quiz generator for teacher view.
+Day 17
+OneSignal push: streak reminder + attendance alert + event notification flows.
+Day 18
+Multilingual: language preference → Gemini responds in Telugu/Hindi.
+Day 19
+Mobile polish: PWA manifest, offline flashcard cache, bottom navigation bar.
+Day 20
+At-risk dashboard (teacher): flag students below 60% quiz average in red.
+Day 21
+Demo prep: seed with real college data, record 3-min video, deploy to Vercel.
+
+===== PAGE 43 =====
+Page 26
+EduMind AI — PRD v2.0 | 100% Free Stack
+SECTION 16 — APPENDIX: QUICK REFERENCE
+npm Packages to Install
+npm create vite@latest edumind-ai -- --template react
+cd edumind-ai
+npm install @supabase/supabase-js @google/generative-ai
+npm install groq-sdk reactflow tone lucide-react
+npm install @radix-ui/react-dialog tailwindcss
+npx shadcn@latest init
+npm install langchain pdf-parse react-onesignal
+API Key Signup URLs — All Free, No Credit Card
+Service
+URL
+Gemini Flash +
+Embeddings
+aistudio.google.com → "Get API key"
+Groq (Llama 3)
+console.groq.com/keys → Sign up with Google
+Supabase
+supabase.com → New Project → Settings → API
+Google OAuth
+console.cloud.google.com → Credentials → OAuth 2.0 Client ID
+OneSignal
+onesignal.com → Create App → Web Push
+Google Cloud TTS
+console.cloud.google.com → Enable "Cloud Text-to-Speech API"
+3 Things That Will WOW in the Demo
+Demo Highlights
+1. Mind Map: Click → interactive zoomable tree → click any node → AI chat opens on that exact sub-topic.
+Visually stunning and different from anything judges have seen.
+2. Voice Notes: Tap mic → speak your lecture notes out loud → structured notes with Key Concepts,
+Formulas, Doubts, and Practice Questions appear in 3 seconds. Wow factor.
+3. Streak + Leaderboard: Show the leaderboard with "You're #2 in class, 3 XP behind Rohan! Your ■
+14-day streak is safe." — addictive by design, solves real motivation problem.
+ EduMind AI — PRD v2.0 (100% Free Stack) | Built by Aditya | Gemini + Groq + Supabase + Vercel + Web APIs | Total Cost: Rs.
+ 0/month
