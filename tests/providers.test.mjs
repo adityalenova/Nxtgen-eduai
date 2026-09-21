@@ -1,0 +1,12 @@
+import {test,after} from 'node:test';
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {mkdtempSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {gemini,initVoice,voiceRoute} from '../server/providers.mjs';
+const originalFetch=globalThis.fetch,root=mkdtempSync(join(tmpdir(),'nxtgen-provider-test-')),db=new DatabaseSync(':memory:');initVoice(db,root);process.env.GEMINI_API_KEY='test-key';process.env.ELEVENLABS_API_KEY='test-key';after(()=>{globalThis.fetch=originalFetch;db.close();rmSync(root,{recursive:true,force:true});});
+test('Gemini requests structured JSON and excludes internal thought content',async()=>{globalThis.fetch=async(url,options)=>{const body=JSON.parse(options.body);assert.equal(body.generationConfig.responseMimeType,'application/json');assert.equal(options.headers['x-goog-api-key'],'test-key');assert.ok(!url.includes('test-key'));return Response.json({candidates:[{content:{parts:[{thought:true,text:'hidden'},{text:'{"answer":42}'}]}}]});};assert.equal(await gemini({content:'test source',instruction:'Answer',user:{},json:true}),'{"answer":42}');});
+test('Provider failures return useful errors without credential disclosure',async()=>{globalThis.fetch=async()=>new Response('{}',{status:401});await assert.rejects(()=>gemini({content:'test',user:{}}),/rejected the API key/);globalThis.fetch=async()=>{throw new Error('secret network detail');};await assert.rejects(()=>gemini({content:'test',user:{}}),/could not be reached/);});
+test('Generated MP3 is cached per account and inaccessible to another account',async()=>{let calls=0,result;globalThis.fetch=async()=>{calls++;return new Response(new Uint8Array(512));};const base={db,root,req:{method:'POST'},res:{setHeader(){},end(){}},path:'/api/voice/speech',body:{text:'Test narration'},user:{id:'a'},send:v=>{result=v;},rate(){}};await voiceRoute(base);const id=result.id;await voiceRoute(base);assert.equal(calls,1);assert.equal(result.cached,true);await assert.rejects(()=>voiceRoute({...base,path:'/api/audio/'+id,req:{method:'GET'},user:{id:'b'}}),e=>e.status===404);await voiceRoute({...base,user:{id:'b'}});assert.equal(calls,2);assert.notEqual(result.id,id);});
+test('Invalid audio uploads are rejected before calling ElevenLabs',async()=>{globalThis.fetch=async()=>{throw new Error('must not call');};await assert.rejects(()=>voiceRoute({db,root,path:'/api/voice/transcribe',req:{method:'POST'},body:{audio:'abc',mimeType:'text/html'},user:{id:'a'},rate(){}}),e=>e.status===400);});

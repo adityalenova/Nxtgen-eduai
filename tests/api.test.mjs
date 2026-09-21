@@ -1,0 +1,53 @@
+import {test,after,before} from 'node:test';
+import assert from 'node:assert/strict';
+import {spawn} from 'node:child_process';
+const base='http://127.0.0.1:3011';let child;
+async function request(path,{cookie,method='GET',body,origin}={}){const r=await fetch(base+path,{method,headers:{'Content-Type':'application/json',...(cookie?{Cookie:cookie}:{}),...(origin?{Origin:origin}:{})},body:body?JSON.stringify(body):undefined});return {status:r.status,body:await r.json(),cookie:r.headers.get('set-cookie')?.split(';')[0]};}
+before(async()=>{child=spawn(process.execPath,['server/index.mjs'],{env:{...process.env,API_PORT:'3011',DB_PATH:':memory:'},stdio:'pipe'});await new Promise((resolve,reject)=>{child.stdout.on('data',resolve);child.on('error',reject);setTimeout(()=>reject(new Error('API did not start')),5000).unref();});});
+after(()=>child?.kill());
+test('Authentication, profile persistence and cross-account isolation',async()=>{
+ assert.equal((await request('/api/me')).status,401);
+ const a=await request('/api/signup',{method:'POST',body:{email:'a@example.com',password:'a-private-passphrase',name:'Learner A',role:'student'}});assert.equal(a.status,200);assert.match(a.cookie,/nxtgen_session=/);
+ const b=await request('/api/signup',{method:'POST',body:{email:'b@example.com',password:'b-private-passphrase',name:'Learner B'}});assert.equal(b.status,200);
+ const item=await request('/api/records',{method:'POST',cookie:a.cookie,body:{kind:'notebooks',title:'Private physics notes',data:{content:'For A only'}}});assert.equal(item.status,201);
+ assert.equal((await request('/api/records',{cookie:a.cookie})).body.length,1);
+ assert.deepEqual((await request('/api/records',{cookie:b.cookie})).body,[]);
+ assert.equal((await request('/api/records/'+item.body.id,{method:'PATCH',cookie:b.cookie,body:{title:'Hijacked'}})).status,404);
+ assert.equal((await request('/api/records/'+item.body.id,{method:'DELETE',cookie:b.cookie})).status,404);
+ await request('/api/profile',{method:'PATCH',cookie:a.cookie,body:{name:'Updated Learner',language:'Telugu',grade:'Class 12'}});
+ assert.equal((await request('/api/me',{cookie:a.cookie})).body.user.name,'Updated Learner');
+ assert.equal((await request('/api/me',{cookie:b.cookie})).body.user.name,'Learner B');
+ await request('/api/logout',{method:'POST',cookie:a.cookie});assert.equal((await request('/api/me',{cookie:a.cookie})).status,401);
+ assert.equal((await request('/api/login',{method:'POST',body:{email:'a@example.com',password:'wrong-password'}})).status,401);
+ const login=await request('/api/login',{method:'POST',body:{email:'a@example.com',password:'a-private-passphrase'}});assert.equal(login.status,200);assert.equal(login.body.user.name,'Updated Learner');assert.equal((await request('/api/records',{cookie:login.cookie})).body[0].title,'Private physics notes');
+});
+test('Forged sessions, cross-origin mutations, and timer shortcuts are rejected',async()=>{
+ assert.equal((await request('/api/me',{cookie:'nxtgen_session=demo'})).status,401);
+ const a=await request('/api/signup',{method:'POST',body:{email:'timer@example.com',password:'a-private-passphrase',name:'Timer Learner'}});
+ assert.equal((await request('/api/profile',{method:'PATCH',origin:'https://evil.example',cookie:a.cookie,body:{name:'Attack'}})).status,403);
+ assert.equal((await request('/api/timer',{method:'POST',cookie:a.cookie,body:{minutes:-1}})).status,400);
+ const timer=await request('/api/timer',{method:'POST',cookie:a.cookie,body:{minutes:25}});assert.equal(timer.status,200);
+ assert.equal((await request('/api/timer/complete',{method:'POST',cookie:a.cookie,body:{id:timer.body.id}})).status,400);
+ assert.equal((await request('/api/me',{cookie:a.cookie})).body.stats.xp,0);
+});
+test('Groups enforce membership, organizer access, private rankings and meeting reservation',async()=>{
+ const signup=async(email,name)=>request('/api/signup',{method:'POST',body:{email,password:'group-private-password',name}});
+ const a=await signup('organizer@example.com','Organizer'),b=await signup('member@example.com','Member'),c=await signup('outsider@example.com','Outsider');
+ const g=await request('/api/school/groups',{method:'POST',cookie:a.cookie,body:{name:'Physics class'}});assert.equal(g.status,201);
+ const base='/api/school/groups/'+g.body.id;
+ assert.equal((await request(base+'/posts',{cookie:c.cookie})).status,404);
+ assert.equal((await request('/api/school/join',{method:'POST',cookie:b.cookie,body:{code:g.body.code}})).status,200);
+ assert.equal((await request(base+'/posts',{method:'POST',cookie:b.cookie,body:{kind:'announcements',title:'Unauthorized'}})).status,403);
+ const post=await request(base+'/posts',{method:'POST',cookie:a.cookie,body:{kind:'announcements',title:'Class update',data:{notes:'Exam on Friday'}}});assert.equal(post.status,201);
+ assert.equal((await request(base+'/posts',{cookie:b.cookie})).body[0].title,'Class update');
+ await request(base+'/posts/'+post.body.id+'/react',{method:'POST',cookie:b.cookie,body:{value:'read'}});
+ assert.equal((await request(base+'/posts',{cookie:a.cookie})).body[0].count,1);
+ assert.equal((await request(base+'/posts/'+post.body.id,{method:'DELETE',cookie:b.cookie})).status,403);
+ const meeting=await request(base+'/posts',{method:'POST',cookie:a.cookie,body:{kind:'ptm',title:'Progress meeting',data:{date:'2026-10-01',start_time:'10:00'}}});
+ assert.equal((await request(base+'/posts/'+meeting.body.id+'/react',{method:'POST',cookie:b.cookie,body:{value:'booked'}})).status,200);
+ assert.equal((await request(base+'/posts/'+meeting.body.id+'/react',{method:'POST',cookie:a.cookie,body:{value:'booked'}})).status,409);
+ const board=await request(base+'/leaderboard',{cookie:a.cookie});assert.equal(board.body.find(r=>!r.self).name,'Anonymous learner');
+ await request(base+'/preferences',{method:'PATCH',cookie:b.cookie,body:{share_name:true}});
+ assert.equal((await request(base+'/leaderboard',{cookie:a.cookie})).body.find(r=>!r.self).name,'Member');
+ assert.equal((await request(base+'/leaderboard',{cookie:c.cookie})).status,404);
+});

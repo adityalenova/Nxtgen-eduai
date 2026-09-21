@@ -5,3 +5,10 @@ dist/
 outputs/
 *.zip
 .work/
+
+data/
+.env.local
+test-results/
+playwright-report/
+work/qa/
+work/

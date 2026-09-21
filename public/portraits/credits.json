@@ -1,0 +1,17 @@
+[
+  {
+    "name": "einstein",
+    "source": "https://commons.wikimedia.org/wiki/File:Einstein1921_by_F_Schmutzer_2.jpg",
+    "license": "Public domain"
+  },
+  {
+    "name": "curie",
+    "source": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg",
+    "license": "Public domain"
+  },
+  {
+    "name": "newton",
+    "source": "https://commons.wikimedia.org/wiki/File:GodfreyKneller-IsaacNewton-1689_(cropped).jpg",
+    "license": "Public domain"
+  }
+]

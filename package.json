@@ -4,17 +4,27 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "node dev.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "api": "node server/index.mjs",
+    "test": "node --test tests/api.test.mjs tests/providers.test.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
     "framer-motion": "latest",
+    "lucide-react": "^1.46.0",
+    "pdfjs-dist": "^6.3.289",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
+    "simple-icons": "^14.15.0",
     "vite": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
 }
