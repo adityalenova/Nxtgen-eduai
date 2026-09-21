@@ -40,7 +40,7 @@ function stats(uid) {
  return {xp:activity.reduce((n,a)=>n+a.xp,0),streak,activity,minutes:read('SELECT COALESCE(SUM(minutes),0) n FROM timers WHERE user_id=? AND completed=1',uid).n};
 }
 const allowedOrigins=new Set([process.env.APP_ORIGIN||'http://127.0.0.1:5173','http://localhost:5173',...(process.env.APP_ORIGINS||'').split(',').map(x=>x.trim()).filter(Boolean)]);
-const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.woff2':'font/woff2'};
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.jpeg':'image/jpeg','.woff2':'font/woff2'};
 function staticFile(path,res){
  const dist=resolve(root,'dist'),requested=path==='/'?resolve(dist,'index.html'):resolve(dist,'.'+path),file=requested.startsWith(dist)&&existsSync(requested)?requested:resolve(dist,'index.html');
  if(!existsSync(file))return false;res.statusCode=200;res.setHeader('Content-Type',mime[extname(file)]||'application/octet-stream');res.setHeader('Cache-Control',file.endsWith('index.html')?'no-cache':'public, max-age=31536000, immutable');createReadStream(file).pipe(res);return true;

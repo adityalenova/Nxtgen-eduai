@@ -8,6 +8,7 @@ outputs/
 
 data/
 .env.local
+public/images/*.png
 test-results/
 playwright-report/
 work/qa/

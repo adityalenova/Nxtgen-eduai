@@ -13,5 +13,20 @@
     "name": "newton",
     "source": "https://commons.wikimedia.org/wiki/File:GodfreyKneller-IsaacNewton-1689_(cropped).jpg",
     "license": "Public domain"
+  },
+  {
+    "name": "keller",
+    "source": "https://commons.wikimedia.org/wiki/File:Helen_Keller.jpg",
+    "license": "Public domain"
+  },
+  {
+    "name": "tesla",
+    "source": "https://commons.wikimedia.org/wiki/File:Nikola_Tesla.jpg",
+    "license": "Public domain"
+  },
+  {
+    "name": "washington",
+    "source": "https://commons.wikimedia.org/wiki/File:Booker_T_Washington_portrait.jpg",
+    "license": "Public domain"
   }
 ]

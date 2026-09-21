@@ -29,6 +29,10 @@ When the four Supabase variables are absent, the local preview uses SQLite at `d
 
 The core account, profile, workspace record, progress, and timer data persist in Supabase. Current study-group and generated-audio storage uses the Node service's local disk; attach a persistent disk or move those features to managed storage before relying on them across server replacements.
 
+## Installable app
+
+NxtGen includes a web app manifest, NxtGen-branded 192px and 512px icons, mobile theme metadata, and an offline application shell. On a production HTTPS deployment, supported browsers can install it from their browser menu and open it in a standalone window. API requests are never cached by the service worker.
+
 ## Connected AI and voice
 
 Set GEMINI_API_KEY and ELEVENLABS_API_KEY in the server-only `.env.local` using `.env.example` as a template. Restart the API after changes. Gemini powers educational generation and image transcription; ElevenLabs powers MP3 speech and uploaded/recorded audio transcription. Resend is not used. Credentials never enter the client bundle.
