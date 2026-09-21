@@ -3,8 +3,8 @@ import {initSchool,schoolRoute} from './school.mjs';
 import { createServer } from 'node:http';
 import { DatabaseSync } from 'node:sqlite';
 import { randomBytes, randomUUID, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
-import { mkdirSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { mkdirSync,existsSync,createReadStream } from 'node:fs';
+import { resolve, dirname,extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -39,14 +39,28 @@ function stats(uid) {
  while(dates.includes(date())) {streak++;cursor.setDate(cursor.getDate()-1);}
  return {xp:activity.reduce((n,a)=>n+a.xp,0),streak,activity,minutes:read('SELECT COALESCE(SUM(minutes),0) n FROM timers WHERE user_id=? AND completed=1',uid).n};
 }
+const allowedOrigins=new Set([process.env.APP_ORIGIN||'http://127.0.0.1:5173','http://localhost:5173',...(process.env.APP_ORIGINS||'').split(',').map(x=>x.trim()).filter(Boolean)]);
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.woff2':'font/woff2'};
+function staticFile(path,res){
+ const dist=resolve(root,'dist'),requested=path==='/'?resolve(dist,'index.html'):resolve(dist,'.'+path),file=requested.startsWith(dist)&&existsSync(requested)?requested:resolve(dist,'index.html');
+ if(!existsSync(file))return false;res.statusCode=200;res.setHeader('Content-Type',mime[extname(file)]||'application/octet-stream');res.setHeader('Cache-Control',file.endsWith('index.html')?'no-cache':'public, max-age=31536000, immutable');createReadStream(file).pipe(res);return true;
+}
+async function supabaseIdentity(req){
+ const token=req.headers.authorization?.match(/^Bearer\s+(.+)$/i)?.[1];if(!token||!process.env.SUPABASE_URL||!process.env.SUPABASE_ANON_KEY)return null;
+ const response=await fetch(process.env.SUPABASE_URL.replace(/\/$/,'')+'/auth/v1/user',{headers:{apikey:process.env.SUPABASE_ANON_KEY,Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)});
+ if(response.status===401)return null;if(!response.ok)fail('Account verification is temporarily unavailable.',503);return response.json();
+}
 export const server = createServer(async(req,res)=>{
  res.setHeader('Content-Type','application/json'); res.setHeader('Cache-Control','no-store'); res.setHeader('X-Content-Type-Options','nosniff');
  const send=(data,status=200)=>{res.statusCode=status;res.end(JSON.stringify(data));};
  try {
   const path=new URL(req.url,'http://localhost').pathname;
+  const origin=req.headers.origin;
+  if(origin&&allowedOrigins.has(origin)){res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Access-Control-Allow-Credentials','true');res.setHeader('Access-Control-Allow-Headers','Authorization, Content-Type');res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, DELETE, OPTIONS');res.setHeader('Vary','Origin');}
+  if(req.method==='OPTIONS'){if(origin&&!allowedOrigins.has(origin))fail('Request origin is not allowed.',403);res.statusCode=204;return res.end();}
+  if(req.method==='GET'&&!path.startsWith('/api/')){if(staticFile(path,res))return;}
   if(!['GET','HEAD'].includes(req.method)) {
-   const origin=req.headers.origin;
-   if(origin && ![process.env.APP_ORIGIN||'http://127.0.0.1:5173','http://localhost:5173'].includes(origin)) fail('Request origin is not allowed.',403);
+   if(origin&&!allowedOrigins.has(origin))fail('Request origin is not allowed.',403);
    if(!req.headers['content-type']?.startsWith('application/json')) fail('JSON content required.',415);
   }
   let raw=''; for await (const chunk of req){raw+=chunk;if(raw.length>16_000_000) fail('Request is too large.',413);}
@@ -54,7 +68,9 @@ export const server = createServer(async(req,res)=>{
   if(path==='/api/health') return send({ok:true,ai:Boolean(process.env.GEMINI_API_KEY),voice:Boolean(process.env.ELEVENLABS_API_KEY)});
   const cookie=req.headers.cookie?.split(';').map(x=>x.trim()).find(x=>x.startsWith('nxtgen_session='))?.slice(15);
   const session=cookie && read('SELECT * FROM sessions WHERE token=? AND expires>?',hash(cookie),Date.now());
-  const user=session && read('SELECT * FROM users WHERE id=?',session.user_id);
+  let user=session && read('SELECT * FROM users WHERE id=?',session.user_id);
+  const cloud=await supabaseIdentity(req);
+  if(cloud){const metadata=cloud.user_metadata||{},role=['student','teacher','parent'].includes(metadata.role)?metadata.role:'student',name=text(metadata.full_name||metadata.name||cloud.email?.split('@')[0]||'Learner',80);run('INSERT OR IGNORE INTO users(id,email,name,password,role,language,grade,created) VALUES(?,?,?,?,?,?,?,?)',cloud.id,cloud.email,name,'supabase:'+('00'.repeat(64)),role,text(metadata.language,40)||'English',text(metadata.grade,80),now());run('UPDATE users SET email=?,name=?,role=? WHERE id=?',cloud.email,name,role,cloud.id);user=read('SELECT * FROM users WHERE id=?',cloud.id);}
   if(['/api/signup','/api/login'].includes(path) && req.method==='POST') {
    rate(req.socket.remoteAddress+'auth');
    const email=text(body.email,254).toLowerCase(), password=body.password;
@@ -114,4 +130,4 @@ export const server = createServer(async(req,res)=>{
   fail('Route not found.',404);
  } catch(error){send({error:error.status?error.message:'Something went wrong. Please try again.'},error.status||500);if(!error.status)console.error(error.message);}
 });
-server.listen(Number(process.env.API_PORT||3001),'127.0.0.1',()=>console.log('NxtGen API http://127.0.0.1:'+(process.env.API_PORT||3001)));
+server.listen(Number(process.env.PORT||process.env.API_PORT||3001),process.env.HOST||'127.0.0.1',()=>console.log('NxtGen server ready on port '+(process.env.PORT||process.env.API_PORT||3001)));

@@ -8,9 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "api": "node server/index.mjs",
-    "test": "node --test tests/api.test.mjs tests/providers.test.mjs"
+    "start": "node server/index.mjs",
+    "test": "node --test tests/api.test.mjs tests/cloud-auth.test.mjs tests/providers.test.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
     "@vitejs/plugin-react": "latest",
     "framer-motion": "latest",
     "lucide-react": "^1.46.0",

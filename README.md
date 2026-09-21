@@ -1,6 +1,6 @@
 # NxtGen Learning
 
-A refinement of the existing React/Vite NxtGen site, with a working local account and learning workspace.
+A React/Vite learning workspace with public Supabase accounts, private per-user records, and a local SQLite development fallback.
 
 ## Start the complete local preview
 
@@ -11,13 +11,23 @@ pnpm install
 pnpm dev
 ```
 
-Open http://127.0.0.1:5173. This starts Vite and the API on port 3001. Create an account to open your private dashboard. No demo identity or shared browser-storage profile is used.
+Open http://127.0.0.1:5173. This starts Vite and the API on port 3001. Without Supabase environment values, the app uses its local SQLite account system for development.
 
-## Data and authentication
+## Public accounts with Supabase
 
-The local preview uses SQLite at `data/nxtgen.sqlite`. Account passwords are salted and hashed with scrypt; sessions use random tokens in HttpOnly, SameSite cookies, with hashed tokens stored in the database. Every private record query is scoped to the authenticated user. Do not commit the data directory. The API enforces group membership and organizer permissions for shared school records.
+Create a Supabase project, open its SQL editor, and run `supabase/migrations/0002_cloud_accounts.sql`. Then copy `.env.example` to `.env.local` and set `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `SUPABASE_URL`, and `SUPABASE_ANON_KEY`. The two key values use the project's public anon/publishable key; never put a service-role key in a `VITE_` variable.
 
-This local backend requires a persistent Node server and disk. It is not a Vercel serverless database. The original Supabase migration is retained for reference; it is not the runtime adapter. A production Supabase deployment requires a separate migration/adapter, configured project credentials, email verification/recovery, and OAuth configuration.
+In Supabase Authentication → URL Configuration, set the Site URL to the public HTTPS origin and add `<public-origin>/auth` to Redirect URLs. Add `http://127.0.0.1:5173/auth` while developing. These URLs are required for email confirmation and password recovery.
+
+Supabase Auth stores password credentials and issues persistent sessions. Public profile and learning tables reference `auth.users`; row-level security limits every read and write to the signed-in user. The browser cannot award arbitrary progress points, and no service-role credential is used. The Node service independently verifies Supabase bearer tokens before serving AI, voice, and school routes.
+
+When the four Supabase variables are absent, the local preview uses SQLite at `data/nxtgen.sqlite`. Local passwords are salted and hashed with scrypt, sessions use random HttpOnly cookies, and private queries remain scoped to the authenticated user. This fallback is intended for development on one computer.
+
+## Public deployment
+
+`render.yaml` defines a Render web service that builds the Vite app and serves both the site and API from one HTTPS origin. Connect this repository as a Render Blueprint, add the Supabase values and provider keys when prompted, then add the resulting Render URL to the Supabase URL Configuration described above. Set `APP_ORIGINS` only if the browser UI and Node API use different origins.
+
+The core account, profile, workspace record, progress, and timer data persist in Supabase. Current study-group and generated-audio storage uses the Node service's local disk; attach a persistent disk or move those features to managed storage before relying on them across server replacements.
 
 ## Connected AI and voice
 
