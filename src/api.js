@@ -3,6 +3,20 @@ import {cloudError,isSupabaseConfigured,supabase} from './supabase';
 const cloudPaths=/^\/(signup|login|logout|forgot-password|update-password|me|profile|records(?:\/[^/]+)?|timer(?:\/complete)?|school(?:\/.*)?)$/;
 const clean=(value,max=500)=>typeof value==='string'?value.trim().slice(0,max):'';
 const rowRecord=row=>({...row,created:row.created_at});
+const guestActive=()=>sessionStorage.getItem('nxtgen-guest')==='true';
+let guestRecords=[];
+export function startGuestSession(){sessionStorage.setItem('nxtgen-guest','true');guestRecords=[];}
+async function guestApi(path,{method='GET',body={}}={}){
+ const guest={id:'guest',name:'Guest learner',email:'',role:'student',language:'English',grade:''};
+ if(path==='/me')return {user:guest,stats:{xp:0,streak:0,activity:[],minutes:0}};
+ if(path==='/records'&&method==='GET')return guestRecords;
+ if(path==='/records'&&method==='POST'){const row={id:crypto.randomUUID(),kind:clean(body.kind,60),title:clean(body.title,500),data:body.data||{},created:new Date().toISOString()};guestRecords=[row,...guestRecords];return {id:row.id};}
+ const record=path.match(/^\/records\/([^/]+)$/);if(record&&method==='DELETE'){guestRecords=guestRecords.filter(row=>row.id!==record[1]);return {ok:true};}if(record&&method==='PATCH'){guestRecords=guestRecords.map(row=>row.id===record[1]?{...row,title:body.title||row.title,data:body.data||row.data}:row);return {ok:true};}
+ if(path==='/timer'&&method==='POST')return {id:crypto.randomUUID(),ends:Date.now()+Number(body.minutes||25)*60000};
+ if(path==='/timer/complete')return {xp:0,streak:0,activity:[],minutes:0};
+ if(path==='/logout'){sessionStorage.removeItem('nxtgen-guest');guestRecords=[];return {ok:true};}
+ throw Object.assign(new Error('School and community spaces require a saved account.'),{status:403});
+}
 
 async function currentUser(){
  const {data,error}=await supabase.auth.getUser();
@@ -99,6 +113,7 @@ async function cloudApi(path,{method='GET',body={}}={}){
 }
 
 export async function api(path,options={}){
+ if(guestActive())return guestApi(path,options);
  if(isSupabaseConfigured&&cloudPaths.test(path))return cloudApi(path,options);
  const headers={'Content-Type':'application/json',...options.headers};if(isSupabaseConfigured){const {data}=await supabase.auth.getSession();if(data.session)headers.Authorization=`Bearer ${data.session.access_token}`;}
  const base=(import.meta.env.VITE_API_URL||'').replace(/\/$/,'');const response=await fetch(`${base}/api${path}`,{credentials:'same-origin',...options,headers,body:options.body?JSON.stringify(options.body):undefined});const data=await response.json().catch(()=>({error:'The application service is unavailable.'}));if(!response.ok)throw Object.assign(new Error(data.error||'Request failed'),{status:response.status});return data;
