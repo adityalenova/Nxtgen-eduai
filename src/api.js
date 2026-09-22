@@ -1,6 +1,6 @@
 import {cloudError,isSupabaseConfigured,supabase} from './supabase';
 
-const cloudPaths=/^\/(signup|login|logout|forgot-password|update-password|me|profile|records(?:\/[^/]+)?|timer(?:\/complete)?)$/;
+const cloudPaths=/^\/(signup|login|logout|forgot-password|update-password|me|profile|records(?:\/[^/]+)?|timer(?:\/complete)?|school(?:\/.*)?)$/;
 const clean=(value,max=500)=>typeof value==='string'?value.trim().slice(0,max):'';
 const rowRecord=row=>({...row,created:row.created_at});
 
@@ -41,6 +41,22 @@ async function award(userId,action,xp,dedupeKey){
  const {error}=await supabase.rpc('award_activity',{event_action:action,event_xp:xp,event_key:dedupeKey||crypto.randomUUID()});if(error)throw cloudError(error);
 }
 
+async function schoolApi(path,{method='GET',body={}}={}){
+ const user=await currentUser();
+ const call=async(name,args={})=>{const {data,error}=await supabase.rpc(name,args);if(error)throw cloudError(error);return data;};
+ if(path==='/school/groups'&&method==='GET')return call('my_study_groups');
+ if(path==='/school/groups'&&method==='POST'){const rows=await call('create_study_group',{group_name:clean(body.name,150)});return Array.isArray(rows)?rows[0]:rows;}
+ if(path==='/school/join'&&method==='POST'){const id=await call('join_study_group',{code:clean(body.code,64)});return {id};}
+ const match=path.match(/^\/school\/groups\/([^/]+)(?:\/(.*))?$/);if(!match)throw Object.assign(new Error('School route not found.'),{status:404});
+ const [,groupId,action='']=match;
+ if(action==='posts'&&method==='GET'){const rows=await call('group_feed',{requested_group:groupId});return rows.map(row=>({...row,created:row.created_at,canEdit:row.can_edit,count:Number(row.reaction_count||0)}));}
+ if(action==='posts'&&method==='POST'){const id=await call('publish_group_post',{requested_group:groupId,post_kind:body.kind,post_title:clean(body.title,500),post_data:body.data||{}});return {id};}
+ if(action==='leaderboard'&&method==='GET'){const rows=await call('group_leaderboard',{requested_group:groupId});return rows.map(row=>({id:row.user_id,name:row.name,self:row.self,all:Number(row.all_xp||0),week:Number(row.week_xp||0),month:Number(row.month_xp||0)}));}
+ if(action==='preferences'&&method==='PATCH'){await call('set_group_name_preference',{requested_group:groupId,visible:!!body.share_name});return {ok:true};}
+ const post=action.match(/^posts\/([^/]+)(?:\/(react))?$/);if(post){if(post[2]&&method==='POST'){await call('react_to_group_post',{requested_post:post[1],response:body.value});return {ok:true};}if(method==='DELETE'){await call('delete_group_post',{requested_post:post[1]});return {ok:true};}}
+ throw Object.assign(new Error('School route not found.'),{status:404});
+}
+
 async function cloudApi(path,{method='GET',body={}}={}){
  if(path==='/signup'&&method==='POST'){
   const email=clean(body.email,254).toLowerCase(),password=body.password;if(!email||typeof password!=='string'||password.length<10)throw Object.assign(new Error('Use a valid email and a password of at least 10 characters.'),{status:400});
@@ -57,6 +73,7 @@ async function cloudApi(path,{method='GET',body={}}={}){
   if(typeof body.password!=='string'||body.password.length<10)throw Object.assign(new Error('Use a password of at least 10 characters.'),{status:400});const {error}=await supabase.auth.updateUser({password:body.password});if(error)throw cloudError(error);return {ok:true};
  }
  if(path==='/logout'&&method==='POST'){const {error}=await supabase.auth.signOut();if(error)throw cloudError(error);return {ok:true};}
+ if(path.startsWith('/school/'))return schoolApi(path,{method,body});
  const user=await currentUser();
  if(path==='/me'&&method==='GET')return {user:await profileFor(user),stats:await cloudStats(user.id)};
  if(path==='/profile'&&method==='PATCH'){

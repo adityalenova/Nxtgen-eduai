@@ -2,7 +2,7 @@ import {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Users,Plus,Copy,Check,CalendarDays,ArrowUpRight,Trash2,FileText,Trophy,RefreshCw} from 'lucide-react';
 import {api,download} from './api';
-const fields={announcements:['Audience','Notes'],events:['Date','Start time','Venue','Notes'],ptm:['Date','Start time','Teacher','Notes'],circulars:['Date','Notes'],achievements:['Subject','Notes'],'class-calendar':['Date','Subject','Notes'],resources:['Subject','URL','Notes']};
+const fields={announcements:['Audience','Notes'],events:['Date','Start time','Venue','Notes'],ptm:['Date','Start time','Teacher','Notes'],fees:['Due date','Amount','Notes'],circulars:['Date','Notes'],achievements:['Subject','Notes'],'class-calendar':['Date','Subject','Notes'],resources:['Subject','URL','Notes']};
 function Field({label,...props}){return <label className="field">{label}<input {...props}/></label>;}
 export default function SchoolHub({tool,user,notify}){
  const [groups,setGroups]=useState([]),[gid,setGid]=useState(''),[posts,setPosts]=useState([]),[leaders,setLeaders]=useState([]),[range,setRange]=useState('week'),[loading,setLoading]=useState(true),[adding,setAdding]=useState(false),[busy,setBusy]=useState(false);
