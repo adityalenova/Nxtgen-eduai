@@ -12,7 +12,7 @@ async function currentUser(){
 
 async function ensureProfile(user,details={}){
  const metadata=user.user_metadata||{};
- const profile={id:user.id,display_name:clean(details.name||metadata.full_name||metadata.name||user.email?.split('@')[0],80)||'Learner',role:['student','teacher','parent'].includes(details.role||metadata.role)?details.role||metadata.role:'student',grade:clean(details.grade??metadata.grade??'',80),language:clean(details.language??metadata.language??'English',40)||'English'};
+ const profile={id:user.id,display_name:clean(details.name||metadata.full_name||metadata.name||user.email?.split('@')[0],80)||'Learner',role:['student','teacher','parent','management'].includes(details.role||metadata.role)?details.role||metadata.role:'student',grade:clean(details.grade??metadata.grade??'',80),language:clean(details.language??metadata.language??'English',40)||'English'};
  const {error}=await supabase.from('profiles').upsert(profile,{onConflict:'id',ignoreDuplicates:true});
  if(error)throw cloudError(error,'Your profile could not be created.');
  const {data, error:readError}=await supabase.from('profiles').select('*').eq('id',user.id).single();
