@@ -35,3 +35,9 @@ body{line-height:1.65}button,input,select,textarea{font:inherit}button:disabled{
 /* Keep the personal dashboard composed on a straight grid. */
 .workspace .heading-icon,.workspace .growth-art>svg,.workspace .growth-ring{transform:none!important}
 @keyframes leaf-page-in{0%{opacity:0;transform:translateY(12px);clip-path:ellipse(15% 12% at 12% 8%)}55%{opacity:1;transform:translateY(0);clip-path:ellipse(110% 105% at 12% 8%)}100%{opacity:1;transform:translateY(0);clip-path:ellipse(145% 130% at 12% 8%)}}
+
+/* Dashboard routes change instantly; the quote card remains a static focal point. */
+.workspace-content{animation:none!important;transform:none!important;clip-path:none!important}
+.workspace .wisdom-card{position:relative;border-color:#d8ddd3;background:linear-gradient(120deg,#fff 0%,#fbfcf7 62%,#f1f5e8 100%);box-shadow:0 14px 34px rgba(38,61,42,.07)}
+.workspace .wisdom-card:before{content:"";position:absolute;inset:11px;border:1px solid rgba(115,142,92,.18);border-radius:15px;pointer-events:none}
+.workspace .wisdom-card figure{position:relative;z-index:1}.workspace .wisdom-eyebrow{color:#486a49}.workspace .wisdom-count{color:#6c7e62}
